@@ -34,6 +34,8 @@ class Game():
 
         #add town hall to the board
         self.buildings.append(Building(self,np.array(TH_BLOCKS),10,CHAR_TH))
+        #add HUT1 to the board
+        self.buildings.append(Building(self,np.array(H1_BLOCKS),10,CHAR_H1))
         
         # for i in X_SPAWN:
         #     for j in Y_SPAWN:

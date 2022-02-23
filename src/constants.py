@@ -30,6 +30,13 @@ CHAR_TH = '| T |'
 TH_BLOCKS = [[X_TH,Y_TH],[X_TH,Y_TH+1],[X_TH,Y_TH+2],[X_TH,Y_TH+3],[X_TH+1,Y_TH],[X_TH+1,Y_TH+1],[X_TH+1,Y_TH+2],[X_TH+1,Y_TH+3],
 [X_TH+2,Y_TH],[X_TH+2,Y_TH+1],[X_TH+2,Y_TH+2],[X_TH+2,Y_TH+3]]
 
+#HUT 1
+X_H1 = 3
+Y_H1 = 3
+HP_H1 = 10
+CHAR_H1 = '| H |'
+H1_BLOCKS = [[X_H1,Y_H1],[X_H1, Y_H1+1]]
+
 #Spawn locations
 X_SPAWN = [ROWS_V-2,1,ROWS_V-2]
 Y_SPAWN = [2,COLS_V-2,COLS_V-2]
