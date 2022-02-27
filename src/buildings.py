@@ -24,6 +24,7 @@ class Building:
 
     def display(self):
         #display based on health
+        self.bu_char = self.actual_char
         if self.bu_health >= HP_TH*0.5:
             self.colour = Fore.BLACK + Back.GREEN
         elif self.bu_health >= HP_TH*0.2 and self.bu_health < HP_TH*0.5:

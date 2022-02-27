@@ -20,6 +20,7 @@ HP_KING = 100
 ROWS_W = 1
 COLS_W = 1
 HP_WALL = 10
+CHAR_WALL = '| W |'
 WALLS = [[10,10,10],[10,11,10]]
 
 #Town Hall
@@ -40,6 +41,12 @@ H1_BLOCKS = [[X_H1,Y_H1],[X_H1, Y_H1+1]]
 #Spawn locations
 X_SPAWN = [ROWS_V-2,1,ROWS_V-2]
 Y_SPAWN = [2,COLS_V-2,COLS_V-2]
+SPAWN_POINTS = [[ROWS_V-2,2],[1,COLS_V-2],[ROWS_V-2,COLS_V-2]]
+
+#Barbs
+BARB_HP = 10
+BARB_CHAR = '| B |'
+BARB_ATTACK = 1
 
 #clock
 clock = 0

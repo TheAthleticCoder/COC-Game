@@ -18,6 +18,9 @@ class Game():
 
         self.walls = []
         self.buildings = []
+        self.troops = []
+        self.build_dict = ''
+        self.printer = ''
         #calling functions
         self.create_board()
 
@@ -29,6 +32,11 @@ class Game():
                 self.board[i][j] = '|   |'
         self.board[X_KING][Y_KING] = self.king_note
         #create walls into the board
+
+        #initilaizing lists to make a dictionary of buildings
+        dict_keys = []
+        dict_values = []
+
         for wall in WALLS:
             self.walls.append(Wall(self,wall[0],wall[1],wall[2]))
 
@@ -36,11 +44,16 @@ class Game():
         self.buildings.append(Building(self,np.array(TH_BLOCKS),10,CHAR_TH))
         #add HUT1 to the board
         self.buildings.append(Building(self,np.array(H1_BLOCKS),10,CHAR_H1))
-        
-        # for i in X_SPAWN:
-        #     for j in Y_SPAWN:
-        #         self.board[i][j] = '| S |'            
 
+
+        #put building coordinates and cuilding class into a dictionary
+        for building in self.buildings:
+            if building.actual_char != CHAR_WALL:
+                for i in building.coords.tolist():
+                    dict_keys.append(tuple(i))
+                    dict_values.append(building)
+                self.build_dict = dict(zip(dict_keys,dict_values))
+        
     #print board
     def print_board(self):
         # for row in self.board:
@@ -50,10 +63,11 @@ class Game():
         #print king health bar
         print("\n")
         print("Kings Health Bar: " + self.health_bar)
-        #print walls health 
-        for wall in self.walls:
-            print("Wall " + str(wall.x) + " " + str(wall.y) + " " + str(wall.wall_health) + ' ' + str(wall.char))
-        #print buildings health
+        print(self.printer)
+        #print all dictionary values
+        # for wall in self.walls:
+        #     print("Wall " + str(wall.x) + " " + str(wall.y) + " " + str(wall.wall_health) + ' ' + str(wall.char))
+        # #print buildings health
         for building in self.buildings:
             print("Building " + str(building.bu_health) + ' ' + str(building.bu_char))
 
