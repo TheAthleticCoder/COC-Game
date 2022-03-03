@@ -22,6 +22,7 @@ COLS_W = 1
 HP_WALL = 10
 CHAR_WALL = '| W |'
 WALLS = [[10,10,10],[10,11,10]]
+NEW_WALLS = [[[5,4]],[[2,10]]]
 
 #Town Hall
 X_TH = 12
@@ -42,6 +43,16 @@ H1_BLOCKS = [[X_H1,Y_H1],[X_H1, Y_H1+1]]
 X_SPAWN = [ROWS_V-2,1,ROWS_V-2]
 Y_SPAWN = [2,COLS_V-2,COLS_V-2]
 SPAWN_POINTS = [[ROWS_V-2,2],[1,COLS_V-2],[ROWS_V-2,COLS_V-2]]
+
+#Defender class
+CHAR_C1 = '| C |'
+X_C1 = 16
+Y_C1 = 16
+HP_C1 = 10
+C1_BLOCKS = [[X_C1,Y_C1]]
+C1_ATTACK = 1
+C1_HEALTH = 10
+
 
 #Barbs
 BARB_HP = 10

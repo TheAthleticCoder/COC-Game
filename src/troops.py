@@ -41,9 +41,32 @@ class Troop:
             #if troop is unable to move to next block, attack the building
             #check if all blocks arround the troop are empty or occupied by another troop
 
-
+            # if self.coords[0] < x_dest and self.game.board[self.coords[0]+1][self.coords[1]] == '|   |':
+            #     if self.coords[1] < y_dest and self.game.board[self.coords[0]+1][self.coords[1]+1] == '|   |':
+            #         self.coords[0] += 1
+            #         self.coords[1] += 1
+            #     elif self.coords[1] > y_dest and self.game.board[self.coords[0]+1][self.coords[1]-1] == '|   |':
+            #         self.coords[0] += 1
+            #         self.coords[1] -= 1
+            # elif self.coords[0] > x_dest and self.game.board[self.coords[0]-1][self.coords[1]] == '|   |':
+            #     if self.coords[1] < y_dest and self.game.board[self.coords[0]-1][self.coords[1]+1] == '|   |':
+            #         self.coords[0] -= 1
+            #         self.coords[1] += 1
+            #     elif self.coords[1] > y_dest and self.game.board[self.coords[0]-1][self.coords[1]-1] == '|   |':
+            #         self.coords[0] -= 1
+            #         self.coords[1] -= 1
+            # else:
+            #     #search if there is a wall in that direction
+            #     for wall in self.game.wall_dict:
+            #         if wall[0] == self.coords[0] and wall[1] == self.coords[1]:
+            #             if wall[2] == 'x':
+            #                 full_attack_x = True
+            #             elif wall[2] == 'y':
+            #                 full_attack_y = True
 
             if self.coords[0] < x_dest and self.game.board[self.coords[0]+1][self.coords[1]] == '|   |' or self.game.board[self.coords[0]+1][self.coords[1]] == '| B |':
+#                if a wall comes in between, break the wall
+
                 self.coords[0] += 1
             elif self.coords[0] > x_dest and self.game.board[self.coords[0]-1][self.coords[1]] == '|   |' or self.game.board[self.coords[0]-1][self.coords[1]] == '| B |':
                 self.coords[0] -= 1
@@ -72,6 +95,7 @@ class Troop:
 
 
     def display(self):
+        self.troop_char = self.actual_char
         if self.troop_health >= self.tot_health*0.5:
             self.colour = Fore.GREEN
         elif self.troop_health >= self.tot_health*0.2 and self.troop_health < self.tot_health*0.5:
@@ -80,5 +104,9 @@ class Troop:
             self.colour = Fore.RED
         self.troop_char = self.colour + self.troop_char + Fore.RESET
         self.game.board[self.coords[0]][self.coords[1]] = self.troop_char
+
+    def check_troop(self):
+        if self.troop_health <= 0:
+            return True
 
         

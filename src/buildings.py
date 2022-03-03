@@ -1,17 +1,21 @@
 import colorama
+import time
 from colorama import Fore, Back, Style
 
 from constants import *
 
 class Building:
-    def __init__(self, game, coords, health, char):
+    def __init__(self, game, coords, health, char, attack_mode, attack_damage, timeT):
         self.game = game
         self.coords = coords
         self.king_hit = False
         self.damage_taken = 0
         self.bu_char = char
         self.actual_char = char
+        self.attack_mode = attack_mode
+        self.attack_damage = attack_damage
         self.bu_health = health
+        self.building_time = timeT
         self.display()
 
     def king_attack(self):
@@ -21,6 +25,18 @@ class Building:
         self.king_hit = False
         self.damage_taken = 0
         self.display()
+
+    def bu_attack(self):
+        if self.attack_mode == True:
+            for troop in self.game.troops:
+                coord_list = troop.coords.tolist()
+                build_list = self.coords.tolist()
+                if (abs(coord_list[0]-build_list[0][0]) <= 5 and abs(coord_list[1]-build_list[0][1]) <= 5):
+                    troop.troop_health -= self.attack_damage
+                    troop.display()
+                    self.display()
+                    break
+        
 
     def display(self):
         #display based on health

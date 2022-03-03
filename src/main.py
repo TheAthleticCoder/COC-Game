@@ -15,6 +15,7 @@ from gamecreate import *
 from walls import Wall
 from buildings import Building
 from troops import Troop
+from defenders import Defender
 colorama.init()
 
 #initialise gaming constraints
@@ -36,17 +37,17 @@ while True:
 
     #deploy troops based on spawn points
     start_time = time.time()
+    game.start_time = start_time
     if (key == 'c'):
         game.troops.append(Troop(game,np.array(SPAWN_POINTS[0]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time))
+        # game.troop_list.append([SPAWN_POINTS[0][0],SPAWN_POINTS[0][1],Troop(game,np.array(SPAWN_POINTS[0]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
     elif (key == 'v'):
         game.troops.append(Troop(game,np.array(SPAWN_POINTS[1]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time))
+        # game.troop_list.append([SPAWN_POINTS[1][0],SPAWN_POINTS[1][1],Troop(game,np.array(SPAWN_POINTS[1]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
     elif (key == 'b'):
         game.troops.append(Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time))
+        # game.troop_list.append([SPAWN_POINTS[2][0],SPAWN_POINTS[2][1],Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
 
-    # #display all troops
-    # for tr in game.troops:
-    #     tr.display()
-    
 
     #move king
     king.move(key)
@@ -60,6 +61,7 @@ while True:
             if(wa.check_wall() == True):
                 game.walls.remove(wa)
                 game.board[wa.x][wa.y] = '|   |'
+                del game.wall_dict[(wa.x,wa.y)]
     #check if building is hit
     for bu in game.buildings:
         if(bu.king_hit == True):
@@ -70,19 +72,21 @@ while True:
             for bu_co in bu.coords:
                 game.board[bu_co[0]][bu_co[1]] = '|   |'
                 del game.build_dict[tuple(bu_co)]
-
-
-    #use time library to move the troops every 2 seconds
-    # if(time.time() - game.troops_time > 2):
-    #     for tr in game.troops:
-    #         tr.move()
-    #     game.troops_time = time.time()
+        if(time.time()-bu.building_time > 1):
+            bu.bu_attack()
+            bu.building_time = time.time()
 
     for tr in game.troops:
         if(time.time()-tr.troop_time > 1):
             tr.move()
             tr.troop_time = time.time()
-    
+        if tr.check_troop() == True:
+            game.troops.remove(tr)
+            #remove items in dictionaries whose keys are the tuple of coordinates
+            tr_list = tr.coords.tolist()
+            game.board[tr_list[0]][tr_list[1]] = '|   |'
+                # del game.troops[tuple(tr_co)]
+        #check if troop is hit
 
     if (key != None):
         time.sleep(T)
