@@ -12,24 +12,13 @@ class Wall:
         self.king_hit = False
         self.damage_taken = 0
         self.char = '| W |'
+        self.actual_char = '| W |'
         self.wall_health = health
         self.display()
         
-    def reset_wall(self):
-        self.wall_health = HP_WALL
-        self.char = '| W |'
-
-    def king_attack(self):
-        # if self.king_hit == True:
-        self.wall_health -= self.damage_taken
-        self.char = '| W |'
-        self.king_hit = False
-        self.damage_taken = 0
-        self.display()
-    
-
     def display(self):
         #colorama style reset
+        self.char = self.actual_char
         health = self.wall_health
         if health >= HP_WALL*0.5:
             self.colour = Fore.BLACK + Back.GREEN

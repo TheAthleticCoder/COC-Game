@@ -15,13 +15,12 @@ from gamecreate import *
 from walls import Wall
 from buildings import Building
 from troops import Troop
-from defenders import Defender
 colorama.init()
 
 #initialise gaming constraints
 
 game = Game()
-king = King(game)
+# king = King(game)
 
 while True:
     #keep it running smoothly
@@ -48,24 +47,20 @@ while True:
         game.troops.append(Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time))
         # game.troop_list.append([SPAWN_POINTS[2][0],SPAWN_POINTS[2][1],Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
 
-
     #move king
-    king.move(key)
+    game.king.move(key)
     #allow king to attack wall multiple times
-    king.attack_wall(key)
-    king.attack_building(key)
+    game.king.attack_wall(key)
+    game.king.attack_building(key)
+
     #check if wall is hit
     for wa in game.walls:
-        if(wa.king_hit == True):
-            wa.king_attack()
-            if(wa.check_wall() == True):
-                game.walls.remove(wa)
-                game.board[wa.x][wa.y] = '|   |'
-                del game.wall_dict[(wa.x,wa.y)]
+        if(wa.check_wall() == True):
+            game.walls.remove(wa)
+            game.board[wa.x][wa.y] = '|   |'
+            del game.wall_dict[(wa.x,wa.y)]
     #check if building is hit
     for bu in game.buildings:
-        if(bu.king_hit == True):
-            bu.king_attack()
         if(bu.check_bu() == True):
             game.buildings.remove(bu)
             #remove items in dictionaries whose keys are the tuple of coordinates
@@ -87,6 +82,7 @@ while True:
             game.board[tr_list[0]][tr_list[1]] = '|   |'
                 # del game.troops[tuple(tr_co)]
         #check if troop is hit
+    # print(game.king.health)
 
     if (key != None):
         time.sleep(T)

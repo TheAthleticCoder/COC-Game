@@ -8,7 +8,6 @@ from constants import *
 from king import King
 from walls import Wall
 from buildings import Building
-from defenders import Defender
 
 class Game():
     def __init__(self):
@@ -16,11 +15,11 @@ class Game():
         self.board = np.zeros((ROWS_V,COLS_V), dtype=object)
         #king vals
         self.health_bar = ''
-        self.king_note = ''
-
+        # self.king_note = ''
         self.walls = []
         self.buildings = []
         self.troops = []
+        self.king = ''
         self.build_dict = ''
         self.wall_dict = ''
         self.troop_list = []
@@ -35,8 +34,9 @@ class Game():
             # self.board.append([])
             for j in range(COLS_V):
                 self.board[i][j] = '|   |'
-        self.board[X_KING][Y_KING] = self.king_note
+        # self.board[X_KING][Y_KING] = self.king_note
         #create walls into the board
+        self.king = King(self)
 
         #initilaizing lists to make a dictionary of buildings
         dict_keys_b = []
@@ -57,8 +57,11 @@ class Game():
         self.buildings.append(Building(self,np.array(H1_BLOCKS),10,CHAR_H1,False,0,self.start_time))
         #add defender to the board
         # self.buildings.append(Defender(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,C1_ATTACK,C1_HEALTH))
-        self.buildings.append(Building(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,True,C1_ATTACK,self.start_time))
+        self.buildings.append(Building(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,True,C1_ATTACK,self.start_time)) 
 
+        # self.troops.append(King(self,np.array(K_BLOCKS),K_HEALTH,CHAR_K,K_ATTACK,K_HEALTH))
+        #append king to self.troops
+        # self.troops.append(King(self,np.array(K_BLOCKS),K_HEALTH,CHAR_K,K_ATTACK,K_HEALTH))
 
         #put building coordinates and cuilding class into a dictionary
         for building in self.buildings:
@@ -78,7 +81,9 @@ class Game():
         print("\n")
         print("Kings Health Bar: " + self.health_bar)
         #print wall dictionary
-        print(self.troops)
+        # print(self.troops)
+        #print kings health bar
+        # print(self.king[0].health)
         #print health of troops
         print("\n")
         for tr in self.troops:
