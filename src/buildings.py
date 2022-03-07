@@ -33,10 +33,11 @@ class Building:
                         break
                     #add elif case if needed, else leave it
         #else attack the king using the king's attack damage
-            elif (abs(build_list[0][0]-self.game.king.x) <= 5 and abs(build_list[0][1]-self.game.king.y) <= 5):
-                self.game.king.health -= self.attack_damage
-                self.game.king.colour_change_king()
-                self.display()
+            elif self.game.king != '':
+                if (abs(build_list[0][0]-self.game.king.x) <= 5 and abs(build_list[0][1]-self.game.king.y) <= 5):
+                    self.game.king.health -= self.attack_damage
+                    self.game.king.colour_change_king()
+                    self.display()
         
 
     def display(self):

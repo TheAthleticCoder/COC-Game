@@ -16,6 +16,7 @@ class King:
         self.curr_move = ''
         self.char = '| K |'
         self.actual_char = '| K |'
+        self.health_bar = ''
         self.colour_change_king()
         # self.health_bar()
     
@@ -31,7 +32,8 @@ class King:
         self.game.board[self.x][self.y] = self.char
 
 
-    def health_bar(self):
+    def health_bar_calc(self):
+        self.health_bar = ''
         temp = int(self.health/5)
         self.health_bar = '|'
         for i in range(temp):
@@ -39,7 +41,8 @@ class King:
         for i in range(int(HP_KING/5) - temp):
             self.health_bar += ' '
         self.health_bar += '|'
-        self.game.health_bar = self.colour + self.health_bar  + Fore.RESET
+        self.health_bar = self.colour + self.health_bar  + Fore.RESET
+        return self.health_bar
 
     #move king on the board
     def move(self,key):
@@ -137,10 +140,9 @@ class King:
         # return 
 
     #function to check if king is dead
-    def check_king_dead(self):
+    def check_king(self):
         if(self.health <= 0):
-            self.kill = True
-
+            return True
 
         
         

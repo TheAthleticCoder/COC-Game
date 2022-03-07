@@ -14,8 +14,6 @@ class Game():
         self.run = True
         self.board = np.zeros((ROWS_V,COLS_V), dtype=object)
         #king vals
-        self.health_bar = ''
-        # self.king_note = ''
         self.walls = []
         self.buildings = []
         self.troops = []
@@ -59,10 +57,6 @@ class Game():
         # self.buildings.append(Defender(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,C1_ATTACK,C1_HEALTH))
         self.buildings.append(Building(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,True,C1_ATTACK,self.start_time)) 
 
-        # self.troops.append(King(self,np.array(K_BLOCKS),K_HEALTH,CHAR_K,K_ATTACK,K_HEALTH))
-        #append king to self.troops
-        # self.troops.append(King(self,np.array(K_BLOCKS),K_HEALTH,CHAR_K,K_ATTACK,K_HEALTH))
-
         #put building coordinates and cuilding class into a dictionary
         for building in self.buildings:
             if building.actual_char != CHAR_WALL:
@@ -79,7 +73,10 @@ class Game():
         print('\n'.join(map(''.join, self.board)))
         #print king health bar
         print("\n")
-        print("Kings Health Bar: " + self.health_bar)
+        if self.king != '':
+            print("Kings Health Bar: " + self.king.health_bar_calc())
+        else:
+            print("King is Dead!")
         #print wall dictionary
         # print(self.troops)
         #print kings health bar

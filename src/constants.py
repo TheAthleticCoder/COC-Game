@@ -14,7 +14,7 @@ COLS_V = 20
 #King position
 X_KING = 1
 Y_KING = 1
-HP_KING = 100
+HP_KING = 50
 
 #Wall class
 ROWS_W = 1

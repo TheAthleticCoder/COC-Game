@@ -48,10 +48,15 @@ while True:
         # game.troop_list.append([SPAWN_POINTS[2][0],SPAWN_POINTS[2][1],Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
 
     #move king
-    game.king.move(key)
-    #allow king to attack wall multiple times
-    game.king.attack_wall(key)
-    game.king.attack_building(key)
+    #if king exists, dp:
+    if(game.king != ''):
+        game.king.move(key)
+        #allow king to attack wall multiple times
+        game.king.attack_wall(key)
+        game.king.attack_building(key)
+        if(game.king.check_king() == True):
+            game.board[game.king.x][game.king.y] = '|   |'
+            game.king = ''
 
     #check if wall is hit
     for wa in game.walls:
@@ -82,7 +87,10 @@ while True:
             game.board[tr_list[0]][tr_list[1]] = '|   |'
                 # del game.troops[tuple(tr_co)]
         #check if troop is hit
-    # print(game.king.health)
+    
+    #if king exists, print its health
+    if(game.king != ''):
+        print(game.king.health)
 
     if (key != None):
         time.sleep(T)
