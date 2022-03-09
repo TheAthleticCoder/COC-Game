@@ -31,7 +31,7 @@ class Game():
         for i in range(ROWS_V):
             # self.board.append([])
             for j in range(COLS_V):
-                self.board[i][j] = '|   |'
+                self.board[i][j] = CHAR_DEA
         # self.board[X_KING][Y_KING] = self.king_note
         #create walls into the board
         self.king = King(self)

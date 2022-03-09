@@ -18,7 +18,6 @@ from troops import Troop
 colorama.init()
 
 #initialise gaming constraints
-
 game = Game()
 # king = King(game)
 
@@ -55,14 +54,14 @@ while True:
         game.king.attack_wall(key)
         game.king.attack_building(key)
         if(game.king.check_king() == True):
-            game.board[game.king.x][game.king.y] = '|   |'
+            game.board[game.king.x][game.king.y] = CHAR_DEA
             game.king = ''
 
     #check if wall is hit
     for wa in game.walls:
         if(wa.check_wall() == True):
             game.walls.remove(wa)
-            game.board[wa.x][wa.y] = '|   |'
+            game.board[wa.x][wa.y] = CHAR_DEA
             del game.wall_dict[(wa.x,wa.y)]
     #check if building is hit
     for bu in game.buildings:
@@ -70,7 +69,7 @@ while True:
             game.buildings.remove(bu)
             #remove items in dictionaries whose keys are the tuple of coordinates
             for bu_co in bu.coords:
-                game.board[bu_co[0]][bu_co[1]] = '|   |'
+                game.board[bu_co[0]][bu_co[1]] = CHAR_DEA
                 del game.build_dict[tuple(bu_co)]
         if(time.time()-bu.building_time > 1):
             bu.bu_attack()
@@ -84,7 +83,7 @@ while True:
             game.troops.remove(tr)
             #remove items in dictionaries whose keys are the tuple of coordinates
             tr_list = tr.coords.tolist()
-            game.board[tr_list[0]][tr_list[1]] = '|   |'
+            game.board[tr_list[0]][tr_list[1]] = CHAR_DEA
                 # del game.troops[tuple(tr_co)]
         #check if troop is hit
     
@@ -97,22 +96,18 @@ while True:
     #if building list is empty, end game
     if(len(game.buildings) == 0):
         print(r''' 
-            _        _       _               _             _         _      _        _         _    
- __/\\__  __/\\__  _/\\___ _____  __/\\___      __/\\___  _ /\\  __/\\___  _/\\___   _/\\_  
-(_  ___))(_  ____)(_      v    ))(_  ____))    (_     _))/ \\ \\(_  ____))(_   _  ))(_  _)) 
- / || _   /  _ \\  /  :   <\   \\ /  ._))       /  _  \\ \:'/ // /  ._))   /  |))//  /  \\  
-/:. \/ \\/:./_\ \\/:. |   //   ///:. ||___     /:.(_)) \\ \  // /:. ||___ /:.    \\ / \ :\\ 
-\  ____//\  _   //\___|  //\  // \  _____))    \  _____//(_  _))\  _____))\___|  // \__/\// 
- \//      \// \//      \//  \//   \//           \//        \//   \//           \//     \//  
-       _     _           _             _    _      _      _           ____     _            
-  _   /\\ __/\\___  ___ /\\       ___ /\\  /\\   _/\\_  _/\\___      (:. _))__/\\           
- /\\ / //(_     _))/  //\ \\     /   |  \\/  \\ (____))(_      ))      \// /_   \\          
- \ \/ //  /  _  \\ \:.\\_\ \\    \:' |   \\   \\ /  \\  /  :   \\            /'://          
- _\:.//  /:.(_)) \\ \  :.  //     \  :   </   ///:.  \\/:. |   //       _   _\.:\\          
-(_  _))  \  _____//(_   ___))    (_   ___^____))\__  //\___|  //      _/\\_\__  //          
-  \//     \//        \//           \//             \//      \//      (:.__))  \//           
-                                                                                            
-                                                                                                                                                                               
+  ________                        ________                    ._.
+ /  _____/_____    _____   ____   \_____  \___  __ ___________| |
+/   \  ___\__  \  /     \_/ __ \   /   |   \  \/ // __ \_  __ \ |
+\    \_\  \/ __ \|  Y Y  \  ___/  /    |    \   /\  ___/|  | \/\|
+ \______  (____  /__|_|  /\___  > \_______  /\_/  \___  >__|   __
+        \/     \/      \/     \/          \/          \/       \/
+_____.___.               __      __.__              ___          
+\__  |   | ____  __ __  /  \    /  \__| ____    /\  \  \         
+ /   |   |/  _ \|  |  \ \   \/\/   /  |/    \   \/   \  \        
+ \____   (  <_> )  |  /  \        /|  |   |  \  /\    )  )       
+ / ______|\____/|____/    \__/\  / |__|___|  /  \/   /  /        
+ \/                            \/          \/       /__/                                                                                                                                                                          
         ''')
         break
     elif(len(game.troops) == 0 and game.king == ''):

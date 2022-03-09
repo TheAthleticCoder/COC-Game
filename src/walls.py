@@ -11,8 +11,8 @@ class Wall:
         self.y = y
         self.king_hit = False
         self.damage_taken = 0
-        self.char = '| W |'
-        self.actual_char = '| W |'
+        self.char = CHAR_WALL
+        self.actual_char = CHAR_WALL
         self.wall_health = health
         self.display()
         
@@ -33,6 +33,8 @@ class Wall:
     def check_wall(self):
         if self.wall_health <= 0:
             return True
+
+
 
     
 

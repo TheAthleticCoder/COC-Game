@@ -35,51 +35,270 @@ class Troop:
             y_dest = f_key[1]
             b = list(sorted_dict.values())[0]
             # reset current position in the board to empty
-            self.game.board[self.coords[0]][self.coords[1]] = '|   |'
+            self.game.board[self.coords[0]][self.coords[1]] = CHAR_DEA
 
-            #move troop towards x_dest and y_dest only if the next block of the troop is empty or occupied by another troop
-            #if troop is unable to move to next block, attack the building
-            #check if all blocks arround the troop are empty or occupied by another troop
+            diff_x = abs(x_dest-self.coords[0])
+            diff_y = abs(y_dest-self.coords[1])
 
-            # if self.coords[0] < x_dest and self.game.board[self.coords[0]+1][self.coords[1]] == '|   |':
-            #     if self.coords[1] < y_dest and self.game.board[self.coords[0]+1][self.coords[1]+1] == '|   |':
+            move_or_wall = False
+            if diff_x == 0:
+                if y_dest > self.coords[1]:
+                    for wall in self.game.walls:
+                        if wall.x == self.coords[0] and wall.y == self.coords[1]+1:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[1]+1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[1] += 1
+                elif y_dest < self.coords[1]:
+                    for wall in self.game.walls:
+                        if wall.x == self.coords[0] and wall.y == self.coords[1]-1:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[1]-1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[1] -= 1
+            elif diff_y == 0:
+                if x_dest > self.coords[0]:
+                    for wall in self.game.walls:
+                        if wall.x == self.coords[0]+1 and wall.y == self.coords[1]:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]+1 == x_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] += 1
+                elif x_dest < self.coords[0]:
+                    for wall in self.game.walls:
+                        if wall.x == self.coords[0]-1 and wall.y == self.coords[1]:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]-1 == x_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] -= 1
+            else:
+                if x_dest > self.coords[0] and y_dest > self.coords[1]:
+                    #check if there is a wall in the way
+                    for wall in self.game.walls:
+                        if self.coords[0]+1 == wall.x and self.coords[1]+1 == wall.y:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]+1 == x_dest and self.coords[1]+1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] += 1
+                        self.coords[1] += 1
+                elif x_dest > self.coords[0] and y_dest < self.coords[1]:
+                    #check if there is a wall in the way
+                    for wall in self.game.walls:
+                        if self.coords[0]+1 == wall.x and self.coords[1]-1 == wall.y:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]+1 == x_dest and self.coords[1]-1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] += 1
+                        self.coords[1] -= 1
+                elif x_dest < self.coords[0] and y_dest > self.coords[1]:
+                    #check if there is a wall in the way
+                    for wall in self.game.walls:
+                        if self.coords[0]-1 == wall.x and self.coords[1]+1 == wall.y:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]-1 == x_dest and self.coords[1]+1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] -= 1
+                        self.coords[1] += 1
+                elif x_dest < self.coords[0] and y_dest < self.coords[1]:
+                    #check if there is a wall in the way
+                    for wall in self.game.walls:
+                        if self.coords[0]-1 == wall.x and self.coords[1]-1 == wall.y:
+                            move_or_wall = True
+                            wall.wall_health -= self.attack_given
+                            wall.display()
+                            break
+                    if self.coords[0]-1 == x_dest and self.coords[1]-1 == y_dest:
+                        self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+                    elif move_or_wall == False:
+                        self.coords[0] -= 1
+                        self.coords[1] -= 1
+            
+            
+            
+            # if diff_x > diff_y:
+            #     if x_dest > self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
             #         self.coords[0] += 1
             #         self.coords[1] += 1
-            #     elif self.coords[1] > y_dest and self.game.board[self.coords[0]+1][self.coords[1]-1] == '|   |':
+            #     elif x_dest > self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
             #         self.coords[0] += 1
             #         self.coords[1] -= 1
-            # elif self.coords[0] > x_dest and self.game.board[self.coords[0]-1][self.coords[1]] == '|   |':
-            #     if self.coords[1] < y_dest and self.game.board[self.coords[0]-1][self.coords[1]+1] == '|   |':
+            #     elif x_dest < self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
             #         self.coords[0] -= 1
             #         self.coords[1] += 1
-            #     elif self.coords[1] > y_dest and self.game.board[self.coords[0]-1][self.coords[1]-1] == '|   |':
+            #     elif x_dest < self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
             #         self.coords[0] -= 1
             #         self.coords[1] -= 1
-            # else:
-            #     #search if there is a wall in that direction
-            #     for wall in self.game.wall_dict:
-            #         if wall[0] == self.coords[0] and wall[1] == self.coords[1]:
-            #             if wall[2] == 'x':
-            #                 full_attack_x = True
-            #             elif wall[2] == 'y':
-            #                 full_attack_y = True
+            # elif diff_x < diff_y:
+            #     if x_dest > self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] += 1
+            #         self.coords[1] += 1
+            #     elif x_dest > self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] += 1
+            #         self.coords[1] -= 1
+            #     elif x_dest < self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] -= 1
+            #         self.coords[1] += 1
+            #     elif x_dest < self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] -= 1
+            #         self.coords[1] -= 1
+            # elif diff_x == diff_y:
+            #     if x_dest > self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] += 1
+            #         self.coords[1] += 1
+            #     elif x_dest > self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]+1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] += 1
+            #         self.coords[1] -= 1
+            #     elif x_dest < self.coords[0] and y_dest > self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]+1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] -= 1
+            #         self.coords[1] += 1
+            #     elif x_dest < self.coords[0] and y_dest < self.coords[1]:
+            #         #check if there is a wall in the way
+            #         for wall in self.game.walls:
+            #             if self.coords[0]-1 == wall.x and self.coords[1]-1 == wall.y:
+            #                 wall.wall_health -= self.attack_given
+            #                 break
+            #         self.coords[0] -= 1
+            #         self.coords[1] -= 1
 
-            if self.coords[0] < x_dest and self.game.board[self.coords[0]+1][self.coords[1]] == '|   |' or self.game.board[self.coords[0]+1][self.coords[1]] == '| B |':
-#                if a wall comes in between, break the wall
 
-                self.coords[0] += 1
-            elif self.coords[0] > x_dest and self.game.board[self.coords[0]-1][self.coords[1]] == '|   |' or self.game.board[self.coords[0]-1][self.coords[1]] == '| B |':
-                self.coords[0] -= 1
-            else:
-                full_attack_x = True
-            if self.coords[1] < y_dest and self.game.board[self.coords[0]][self.coords[1]+1] == '|   |' or self.game.board[self.coords[0]][self.coords[1]+1] == '| B |':
-                self.coords[1] += 1
-            elif self.coords[1] > y_dest and self.game.board[self.coords[0]][self.coords[1]-1] == '|   |' or self.game.board[self.coords[0]][self.coords[1]-1] == '| B |':
-                self.coords[1] -= 1
-            else:
-                full_attack_y = True
-            if full_attack_x == True and full_attack_y == True:
-                self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            # if self.coords[0] <= x_dest:
+            #     for wall in self.game.walls:
+            #         if self.coords[0] + 1 == wall.x:
+            #             wall.wall_health -= self.attack_given
+            #             break
+            #     if self.coords[0] + 1 == x_dest:
+            #         self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #     else:
+            #         self.coords[0] += 1
+            #         if self.coords[1] <= y_dest:
+            #             for wall in self.game.walls:
+            #                 if self.coords[1]+1 == wall.y:
+            #                     wall.wall_health -= self.attack_given
+            #                     break
+            #             if self.coords[1]+1 == y_dest:
+            #                 self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #             else:
+            #                 self.coords[1] += 1
+            #         if self.coords[1] >= y_dest:
+            #             for wall in self.game.walls:
+            #                 if self.coords[1]-1 == wall.y:
+            #                     wall.wall_health -= self.attack_given
+            #                     break
+            #             if self.coords[1]-1 == y_dest:
+            #                 self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #             else:
+            #                 self.coords[1] -= 1
+            # elif self.coords[0] >= x_dest:
+            #     for wall in self.game.walls:
+            #         if self.coords[0] - 1 == wall.x:
+            #             wall.wall_health -= self.attack_given
+            #             break
+            #     if self.coords[0] - 1 == x_dest:
+            #         self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #     else:
+            #         self.coords[0] -= 1
+            #         if self.coords[1] <= y_dest:
+            #             for wall in self.game.walls:
+            #                 if self.coords[1]+1 == wall.y:
+            #                     wall.wall_health -= self.attack_given
+            #                     break
+            #             if self.coords[1]+1 == y_dest:
+            #                 self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #             else:
+            #                 self.coords[1] += 1
+            #         if self.coords[1] >= y_dest:
+            #             for wall in self.game.walls:
+            #                 if self.coords[1]-1 == wall.y:
+            #                     wall.wall_health -= self.attack_given
+            #                     break
+            #             if self.coords[1]-1 == y_dest:
+            #                 self.game.buildings[int(self.game.buildings.index(b))].bu_health -= self.attack_given
+            #             else:
+            #                 self.coords[1] -= 1
+#             
             self.game.buildings[int(self.game.buildings.index(b))].display()
             self.display()
 

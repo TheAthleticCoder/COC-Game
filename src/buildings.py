@@ -60,6 +60,6 @@ class Building:
     #remove building
     def remove_bu(self):
         for build in self.coords.tolist():
-            self.game.board[build[0]][build[1]] = '|  |'
+            self.game.board[build[0]][build[1]] = CHAR_DEA
 
 

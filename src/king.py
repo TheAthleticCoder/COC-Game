@@ -14,8 +14,8 @@ class King:
         self.health = HP_KING
         self.attack = 2
         self.curr_move = ''
-        self.char = '| K |'
-        self.actual_char = '| K |'
+        self.char = '|K|'
+        self.actual_char = '|K|'
         self.health_bar = ''
         self.colour_change_king()
         # self.health_bar()
@@ -47,34 +47,34 @@ class King:
     #move king on the board
     def move(self,key):
         #change king position on board
-        self.game.board[self.x][self.y] = '|   |'
+        self.game.board[self.x][self.y] = CHAR_DEA
         # self.game.king_note = Fore.GREEN + '| K |' + Fore.RESET
         #move king up
         if(key == 'w'):
             self.curr_move = 'w'
-            if(self.x > 0 and self.game.board[self.x-1][self.y] == '|   |'):
+            if(self.x > 0 and self.game.board[self.x-1][self.y] == CHAR_DEA):
                 self.x -= 1
         #move king down
         elif(key == 's'):
             self.curr_move = 's'
-            if(self.x < ROWS_V - 1 and self.game.board[self.x+1][self.y] == '|   |'):
+            if(self.x < ROWS_V - 1 and self.game.board[self.x+1][self.y] == CHAR_DEA):
                 self.x += 1
         #move king left
         elif(key == 'a'):
             self.curr_move = 'a'
-            if(self.y > 0 and self.game.board[self.x][self.y-1] == '|   |'):
+            if(self.y > 0 and self.game.board[self.x][self.y-1] == CHAR_DEA):
                 self.y -= 1
         #move king right
         elif(key == 'd'):
             self.curr_move = 'd'
-            if(self.y < COLS_V - 1 and self.game.board[self.x][self.y+1] == '|   |'):
+            if(self.y < COLS_V - 1 and self.game.board[self.x][self.y+1] == CHAR_DEA):
                 self.y += 1
         self.colour_change_king()
         # self.game.print_board()
 
     #function to attack a building
     def attack_building(self,key):
-        if key == 'x':
+        if key == ' ':
             if(self.curr_move == 'w'):
                 for building in self.game.buildings:
                     for build in building.coords:
@@ -111,7 +111,7 @@ class King:
 
 
     def attack_wall(self,key):
-        if key == 'x':
+        if key == ' ':
             if(self.curr_move == 'w'):
                 #give attack damage to wall at location
                 for wall in self.game.walls:
