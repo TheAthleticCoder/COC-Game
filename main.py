@@ -1,6 +1,7 @@
 #IMPORTING THE REQUIRED MODULES
 import colorama
 import sys
+sys.path.insert(1, './src')
 import time
 from colorama import Fore, Back, Style
 import json
@@ -122,10 +123,10 @@ while True:
     if(len(game.buildings) == 0):
         #append dictionary to json file
         #save moves into replays json folder
-        with open('replays.json', 'r') as fp:
+        with open('./replays/replays.json', 'r') as fp:
             data = json.load(fp)
         data.append(game.game_mov_frame_dict)
-        with open('replays.json', 'w') as fp:
+        with open('./replays/replays.json', 'w') as fp:
             json.dump(data, fp)
         print(Fore.CYAN + game_win + Fore.RESET)
         break
@@ -133,10 +134,10 @@ while True:
     elif(len(game.troops) == 0 and game.king == ''):
         #append dictionary to json file
         #save moves into replays json folder
-        with open('replays.json', 'r') as fp:
+        with open('./replays/replays.json', 'r') as fp:
             data = json.load(fp)
         data.append(game.game_mov_frame_dict)
-        with open('replays.json', 'w') as fp:
+        with open('./replays/replays.json', 'w') as fp:
             json.dump(data, fp)
         print(Fore.GREEN  + game_lose + Fore.RESET)
         break

@@ -25,8 +25,6 @@ class Troop:
     def move(self):
         if bool(self.game.build_dict) == True:
             dicti = self.game.build_dict
-            full_attack_x = False
-            full_attack_y = False
             #sort dictionary based on difference between key and coords
             sorted_dict = dict(sorted(dicti.items(), key=lambda x: abs(x[0][0]-self.coords[0])+abs(x[0][1]-self.coords[1])))
             #get first key and value of the dictionary

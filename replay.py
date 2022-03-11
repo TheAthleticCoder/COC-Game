@@ -1,6 +1,7 @@
 #IMPORTING THE REQUIRED MODULES
 import colorama
 import sys
+sys.path.insert(1, './src')
 import time
 from colorama import Fore, Back, Style
 import json
@@ -17,7 +18,7 @@ colorama.init()
 game = Game()
 
 #read replays.json file 
-with open("replays.json", "r+") as file:
+with open("./replays/replays.json", "r+") as file:
     data = json.load(file)
 
 #choose replay number 
@@ -37,6 +38,7 @@ while True:
     #set key as empty string 
     key = ''
 
+    temp_key = input_to()
     #smoother prinitng
     print("\033[H\033[J", end="")
     
@@ -125,7 +127,13 @@ while True:
         time.sleep(T)
 
     #VERY IMPORTANT FOR MAKING REPLAY RUN SLOWER
-    time.sleep(0.1)
+    #EXTRA FEATURE REPLAY SPEED
+    if temp_key == '1':
+        time.sleep(0.2)
+    elif temp_key == '2':
+        time.sleep(0.1)
+    elif temp_key == '3':
+        time.sleep(0.05)
 
     #ending game code 
     if(len(game.buildings) == 0):
