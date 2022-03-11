@@ -1,5 +1,6 @@
 #IMPORTING THE REQUIRED MODULES
 import colorama
+import os
 import sys
 sys.path.insert(1, './src')
 import time
@@ -128,6 +129,7 @@ while True:
         data.append(game.game_mov_frame_dict)
         with open('./replays/replays.json', 'w') as fp:
             json.dump(data, fp)
+        os.system('aplay -q ./src/sounds/win.wav&')
         print(Fore.CYAN + game_win + Fore.RESET)
         break
     #if troops and king are dead, end game, you lose
@@ -139,6 +141,7 @@ while True:
         data.append(game.game_mov_frame_dict)
         with open('./replays/replays.json', 'w') as fp:
             json.dump(data, fp)
+        os.system('aplay -q ./src/sounds/lose.wav&')
         print(Fore.GREEN  + game_lose + Fore.RESET)
         break
 

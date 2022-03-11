@@ -137,9 +137,11 @@ while True:
 
     #ending game code 
     if(len(game.buildings) == 0):
+        os.system('aplay -q ./src/sounds/win.wav&')
         print(Fore.CYAN + game_win + Fore.RESET)
         break
     elif(len(game.troops) == 0 and game.king == ''):
+        os.system('aplay -q ./src/sounds/lose.wav&')
         print(Fore.GREEN  + game_lose + Fore.RESET)
         break
 
