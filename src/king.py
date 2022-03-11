@@ -37,7 +37,7 @@ class King:
         temp = int(self.health/5)
         self.health_bar = '|'
         for i in range(temp):
-            self.health_bar += '■■'
+            self.health_bar += '■'
         for i in range(int(HP_KING/5) - temp):
             self.health_bar += ' '
         self.health_bar += '|'

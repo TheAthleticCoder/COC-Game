@@ -18,20 +18,39 @@ colorama.init()
 #initialise gaming constraints
 game = Game()
 
+#read json file
+with open("replays.json", "r+") as file:
+    data = json.load(file)
+
+#choose replay
+replay_num = int(input("Enter replay number: "))
+replay_num -= 1
+replay_dict = data[replay_num]
+#note down game start time
+game.game_mov_frame_dict = replay_dict
+game.game_start_time = time.time()
+# king = King(game)
+
 while True:
     #keep it running smoothly
     # os.system('cls' if os.name == 'nt' else 'clear')
     #print board and take input key from input file
     board = game.print_board()
     game.game_frames += 1
+    key = ''
+
     
     print("\033[H\033[J", end="")
     #allow king to make move every 1 second
 
-    key = input_to()
-    
-    if key != None:
-        game.game_mov_frame_dict[game.game_frames] = key
+
+    # key = input_to()
+    for rep in replay_dict:
+        if int(rep) == game.game_frames:
+            key = replay_dict[rep]
+        
+    # if key != None:
+    #     game.game_mov_tim_dict[time.time() - game.game_start_time] = key
 
     #deploy troops based on spawn points
     start_time = time.time()
@@ -115,23 +134,13 @@ while True:
     if (key != None):
         time.sleep(T)
 
-
+    time.sleep(0.1)
     #if building list is empty, end game
     if(len(game.buildings) == 0):
         #append dictionary to json file
-        with open('replays.json', 'r') as fp:
-            data = json.load(fp)
-        data.append(game.game_mov_frame_dict)
-        with open('replays.json', 'w') as fp:
-            json.dump(data, fp)
         print(Fore.CYAN + game_win + Fore.RESET)
         break
     elif(len(game.troops) == 0 and game.king == ''):
-        with open('replays.json', 'r') as fp:
-            data = json.load(fp)
-        data.append(game.game_mov_frame_dict)
-        with open('replays.json', 'w') as fp:
-            json.dump(data, fp)
         print(Fore.GREEN  + game_lose + Fore.RESET)
         break
 

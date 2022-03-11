@@ -13,6 +13,10 @@ from spells import Spells
 class Game():
     def __init__(self):
         self.run = True
+        self.replay = False
+        self.game_frames = 0
+        self.key = ''
+        self.game_mov_frame_dict = {}
         self.board = np.zeros((ROWS_V,COLS_V), dtype=object)
         #king vals
         self.walls = []
@@ -85,7 +89,11 @@ class Game():
         else:
             print("King is Dead!")
 
-        print(self.king.attack)
+        # print(self.key)
+        print(self.game_frames)
+        # print(self.game_mov_frame_dict)
+        # print(self.key)
+        # print(self.game_mov_tim_dict)
         #print wall dictionary
         # print(self.troops)
         #print kings health bar
