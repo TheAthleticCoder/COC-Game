@@ -9,7 +9,6 @@ class King:
         self.game = game
         self.x = X_KING
         self.y = Y_KING
-        # self.coords = [(self.x,self.y)]
         self.kill = False
         self.health = HP_KING
         self.attack = 2
@@ -18,8 +17,8 @@ class King:
         self.actual_char = '|K|'
         self.health_bar = ''
         self.colour_change_king()
-        # self.health_bar()
     
+    #same as display function. Just changes kings look in the grid board
     def colour_change_king(self):
         self.char = self.actual_char
         if self.health >= HP_KING*0.5:
@@ -31,7 +30,7 @@ class King:
         self.char = self.colour + self.char + Fore.RESET 
         self.game.board[self.x][self.y] = self.char
 
-
+    #displays health bar of our king
     def health_bar_calc(self):
         self.health_bar = ''
         temp = int(self.health/5)
@@ -46,9 +45,8 @@ class King:
 
     #move king on the board
     def move(self,key):
-        #change king position on board
+        #replace kings position on board with default character
         self.game.board[self.x][self.y] = CHAR_DEA
-        # self.game.king_note = Fore.GREEN + '| K |' + Fore.RESET
         #move king up
         if(key == 'w'):
             self.curr_move = 'w'
@@ -72,8 +70,9 @@ class King:
         self.colour_change_king()
         # self.game.print_board()
 
-    #function to attack a building
+    #function to attack a building or a wall
     def King_attack(self,key):
+        #single range attack by king
         if key == ' ':
             if(self.curr_move == 'w'):
                 for building in self.game.buildings:

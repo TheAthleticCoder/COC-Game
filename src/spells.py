@@ -11,6 +11,7 @@ class Spells:
         self.spell_start_time = 0
         self.rage_activ = False
 
+    #Assignment Requirement: Heal Spell
     def heal_spell(self):
         #increase health of all troops by 150%
         for troop in self.game.troops:
@@ -24,10 +25,12 @@ class Spells:
             self.game.king.health = HP_KING
         self.game.king.colour_change_king()
 
+    #Assignment Requirement: Rage Spell
     def rage_spell(self):
-        #increase attack of all troops by 200%
+        #increase movement speed
         self.game.troop_move_time = 0.5*TR_AT_TIME
 
+        #increase troops attack power
         for troop in self.game.troops:
             troop.attack_given = 2*BARB_ATTACK
             troop.display()

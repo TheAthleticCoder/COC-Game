@@ -1,3 +1,4 @@
+#IMPORTING THE REQUIRED MODULES
 import colorama
 import sys
 import time
@@ -7,51 +8,43 @@ import json
 # custom modules
 from constants import *
 from input import input_to
-from king import King
 from gamecreate import *
-from walls import Wall
-from buildings import Building
 from troops import Troop
-from spells import Spells
+#Initializing colorama
 colorama.init()
 
-#initialise gaming constraints
+#Initialising the game
 game = Game()
 
-#read json file
+#read replays.json file 
 with open("replays.json", "r+") as file:
     data = json.load(file)
 
-#choose replay
+#choose replay number 
 replay_num = int(input("Enter replay number: "))
 replay_num -= 1
 replay_dict = data[replay_num]
-#note down game start time
+
+#note down game frames 
 game.game_mov_frame_dict = replay_dict
 game.game_start_time = time.time()
-# king = King(game)
 
 while True:
-    #keep it running smoothly
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    #print board and take input key from input file
+    
+    #print board
     board = game.print_board()
     game.game_frames += 1
+    #set key as empty string 
     key = ''
 
-    
+    #smoother prinitng
     print("\033[H\033[J", end="")
-    #allow king to make move every 1 second
-
-
-    # key = input_to()
+    
+    #loop to set key as a input char value based on frames
     for rep in replay_dict:
         if int(rep) == game.game_frames:
             key = replay_dict[rep]
         
-    # if key != None:
-    #     game.game_mov_tim_dict[time.time() - game.game_start_time] = key
-
     #deploy troops based on spawn points
     start_time = time.time()
     game.start_time = start_time
@@ -66,11 +59,8 @@ while True:
         # game.troop_list.append([SPAWN_POINTS[2][0],SPAWN_POINTS[2][1],Troop(game,np.array(SPAWN_POINTS[2]),BARB_HP,BARB_CHAR ,BARB_ATTACK,BARB_HP,start_time) ])
 
     #move king
-    #if king exists, dp:
     if(game.king != ''):
         game.king.move(key)
-        #allow king to attack wall multiple times
-        # game.king.attack_wall(key)
         game.king.King_attack(key)
         if(game.king.check_king() == True):
             game.board[game.king.x][game.king.y] = CHAR_DEA
@@ -94,6 +84,7 @@ while True:
             bu.bu_attack()
             bu.building_time = time.time()
 
+    #check for troops
     for tr in game.troops:
         if(time.time()-tr.troop_time > game.troop_move_time):
             tr.move()
@@ -103,9 +94,8 @@ while True:
             #remove items in dictionaries whose keys are the tuple of coordinates
             tr_list = tr.coords.tolist()
             game.board[tr_list[0]][tr_list[1]] = CHAR_DEA
-                # del game.troops[tuple(tr_co)]
-        #check if troop is hit
-
+            
+    #use spells
     if (key == 'h'):
         #call heal spell
         game.spell.heal_spell()
@@ -113,7 +103,7 @@ while True:
         game.spell.spell_start_time = time.time()
         game.spell.rage_active = True
         #make rage spell last for 10 seconds
-    
+
     if (game.spell.spell_start_time != 0) and game.spell.rage_active == True:
         if (time.time()-game.spell.spell_start_time < game.spell.spell_duration_time):
             game.spell.rage_spell()
@@ -129,15 +119,16 @@ while True:
             game.king.colour_change_king()
     
 
-    #if king exists, print its health
-
+    
+    #make it smooth
     if (key != None):
         time.sleep(T)
 
+    #VERY IMPORTANT FOR MAKING REPLAY RUN SLOWER
     time.sleep(0.1)
-    #if building list is empty, end game
+
+    #ending game code 
     if(len(game.buildings) == 0):
-        #append dictionary to json file
         print(Fore.CYAN + game_win + Fore.RESET)
         break
     elif(len(game.troops) == 0 and game.king == ''):

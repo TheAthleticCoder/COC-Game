@@ -6,8 +6,8 @@ import numpy as np
 
 from constants import *
 from king import King
-from walls import Wall
-from buildings import Building
+# from walls import Wall
+from buildings import Building, Wall
 from spells import Spells
 
 class Game():

@@ -1,8 +1,5 @@
 # We create game constants here
 
-import colorama
-from colorama import Fore, Back, Style,init
-
 #Time
 FPS = 90
 T = 1/FPS

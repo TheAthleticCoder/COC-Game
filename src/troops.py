@@ -144,7 +144,7 @@ class Troop:
             self.game.buildings[int(self.game.buildings.index(b))].display()
             self.display()
 
-
+    #display the position of the troop on the grid of the board
     def display(self):
         self.troop_char = self.actual_char
         if self.troop_health >= self.tot_health*0.5:
@@ -156,6 +156,7 @@ class Troop:
         self.troop_char = self.colour + self.troop_char + Fore.RESET
         self.game.board[self.coords[0]][self.coords[1]] = self.troop_char
 
+    #check for troops health in order to remove him from the board if dead
     def check_troop(self):
         if self.troop_health <= 0:
             return True
