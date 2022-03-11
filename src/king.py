@@ -1,6 +1,7 @@
 import time
 import colorama
 from colorama import Fore, Back, Style
+from sklearn.feature_selection import SelectFdr
 
 from constants import *
 
@@ -73,7 +74,7 @@ class King:
         # self.game.print_board()
 
     #function to attack a building
-    def attack_building(self,key):
+    def King_attack(self,key):
         if key == ' ':
             if(self.curr_move == 'w'):
                 for building in self.game.buildings:
@@ -81,6 +82,10 @@ class King:
                         if(build[0] == self.x-1 and build[1] == self.y):
                             building.bu_health -= self.attack
                             building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x-1 and wall.y == self.y):
+                        wall.wall_health -= self.attack
+                        wall.display()
                             #update values in game.buildings
                         #update values in game.walls
             elif(self.curr_move == 's'):
@@ -89,6 +94,10 @@ class King:
                         if(build[0] == self.x+1 and build[1] == self.y):
                             building.bu_health -= self.attack
                             building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x+1 and wall.y == self.y):
+                        wall.wall_health -= self.attack
+                        wall.display()
                             #update values in game.buildings
                         #update values in game.walls
             elif(self.curr_move == 'a'):
@@ -97,6 +106,10 @@ class King:
                         if(build[0] == self.x and build[1] == self.y-1):
                             building.bu_health -= self.attack
                             building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x and wall.y == self.y-1):
+                        wall.wall_health -= self.attack
+                        wall.display()
                             #update values in game.buildings
                         #update values in game.walls
             elif(self.curr_move == 'd'):
@@ -105,39 +118,52 @@ class King:
                         if(build[0] == self.x and build[1] == self.y+1):
                             building.bu_health -= self.attack
                             building.display()
-                            #update values in game.buildings
-                        #update values in game.walls
-        # return
-
-
-    def attack_wall(self,key):
-        if key == ' ':
-            if(self.curr_move == 'w'):
-                #give attack damage to wall at location
-                for wall in self.game.walls:
-                    if(wall.x == self.x-1 and wall.y == self.y):
-                        wall.wall_health -= self.attack
-                        wall.display()
-                        #update values in game.walls
-            elif(self.curr_move == 's'):
-                #give attack damage to wall at location
-                for wall in self.game.walls:
-                    if(wall.x == self.x+1 and wall.y == self.y):
-                        wall.wall_health -= self.attack
-                        wall.display()
-            elif(self.curr_move == 'a'):
-                #give attack damage to wall at location
-                for wall in self.game.walls:
-                    if(wall.x == self.x and wall.y == self.y-1):
-                        wall.wall_health -= self.attack
-                        wall.display()
-            elif(self.curr_move == 'd'):
-                #give attack damage to wall at location
                 for wall in self.game.walls:
                     if(wall.x == self.x and wall.y == self.y+1):
                         wall.wall_health -= self.attack
                         wall.display()
-        # return 
+        elif (key == 'x'):
+            if(self.curr_move == 'w'):
+                for building in self.game.buildings:
+                    for build in building.coords:
+                        #find buildings all around king
+                        if(build[0] == self.x-1 and build[1] == self.y) or (build[0] == self.x-1 and build[1] == self.y-1) or (build[0] == self.x-1 and build[1] == self.y+1) or (build[0] == self.x and build[1] == self.y-1) or (build[0] == self.x and build[1] == self.y+1):
+                            building.bu_health -= self.attack
+                            building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x-1 and wall.y == self.y) or (wall.x == self.x-1 and wall.y == self.y-1) or (wall.x == self.x-1 and wall.y == self.y+1) or (wall.x == self.x and wall.y == self.y-1) or (wall.x == self.x and wall.y == self.y+1):
+                        wall.wall_health -= self.attack
+                        wall.display()
+            elif(self.curr_move == 's'):
+                for building in self.game.buildings:
+                    for build in building.coords:
+                        if(build[0] == self.x+1 and build[1] == self.y) or (build[0] == self.x+1 and build[1] == self.y-1) or (build[0] == self.x+1 and build[1] == self.y+1) or (build[0] == self.x and build[1] == self.y-1) or (build[0] == self.x and build[1] == self.y+1):
+                            building.bu_health -= self.attack
+                            building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x+1 and wall.y == self.y) or (wall.x == self.x+1 and wall.y == self.y-1) or (wall.x == self.x+1 and wall.y == self.y+1) or (wall.x == self.x and wall.y == self.y-1) or (wall.x == self.x and wall.y == self.y+1):
+                        wall.wall_health -= self.attack
+                        wall.display()
+            elif(self.curr_move == 'a'):
+                for building in self.game.buildings:
+                    for build in building.coords:
+                        if(build[0] == self.x and build[1] == self.y-1) or (build[0] == self.x-1 and build[1] == self.y-1) or (build[0] == self.x+1 and build[1] == self.y-1) or (build[0] == self.x-1 and build[1] == self.y) or (build[0] == self.x+1 and build[1] == self.y):
+                            building.bu_health -= self.attack
+                            building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x and wall.y == self.y-1) or (wall.x == self.x-1 and wall.y == self.y-1) or (wall.x == self.x+1 and wall.y == self.y-1) or (wall.x == self.x-1 and wall.y == self.y) or (wall.x == self.x+1 and wall.y == self.y): 
+                        wall.wall_health -= self.attack
+                        wall.display()
+            elif(self.curr_move == 'd'):
+                for building in self.game.buildings:
+                    for build in building.coords:
+                        if(build[0] == self.x and build[1] == self.y+1) or (build[0] == self.x-1 and build[1] == self.y+1) or (build[0] == self.x+1 and build[1] == self.y+1) or (build[0] == self.x-1 and build[1] == self.y) or (build[0] == self.x+1 and build[1] == self.y):
+                            building.bu_health -= self.attack
+                            building.display()
+                for wall in self.game.walls:
+                    if(wall.x == self.x and wall.y == self.y+1) or (wall.x == self.x-1 and wall.y == self.y+1) or (wall.x == self.x+1 and wall.y == self.y+1) or (wall.x == self.x-1 and wall.y == self.y) or (wall.x == self.x+1 and wall.y == self.y):
+                        wall.wall_health -= self.attack
+                        wall.display()
 
     #function to check if king is dead
     def check_king(self):
