@@ -8,6 +8,7 @@ from constants import *
 from king import King
 from walls import Wall
 from buildings import Building
+from spells import Spells
 
 class Game():
     def __init__(self):
@@ -23,6 +24,9 @@ class Game():
         self.troop_list = []
         self.printer = ''
         self.start_time = 0
+        self.troop_move_time = TR_AT_TIME
+        self.build_att_time = BU_AT_TIME
+        self.spell = ''
         #calling functions
         self.create_board()
 
@@ -35,7 +39,7 @@ class Game():
         # self.board[X_KING][Y_KING] = self.king_note
         #create walls into the board
         self.king = King(self)
-
+        self.spell = Spells(self)
         #initilaizing lists to make a dictionary of buildings
         dict_keys_b = []
         dict_values_b = []
@@ -80,6 +84,8 @@ class Game():
             print("Kings Health Bar: " + self.king.health_bar_calc())
         else:
             print("King is Dead!")
+
+        print(self.king.attack)
         #print wall dictionary
         # print(self.troops)
         #print kings health bar

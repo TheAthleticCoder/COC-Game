@@ -1,7 +1,6 @@
 import time
 import colorama
 from colorama import Fore, Back, Style
-from sklearn.feature_selection import SelectFdr
 
 from constants import *
 

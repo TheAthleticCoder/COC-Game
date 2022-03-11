@@ -15,6 +15,13 @@ COLS_V = 25
 X_KING = 1
 Y_KING = 1
 HP_KING = 10
+KING_ATTACK = 2
+
+
+#ATTACK TIMES
+BU_AT_TIME = 1
+TR_AT_TIME = 1
+
 
 #Default char
 CHAR_DEA = '| |'

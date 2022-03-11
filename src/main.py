@@ -15,10 +15,12 @@ from gamecreate import *
 from walls import Wall
 from buildings import Building
 from troops import Troop
+from spells import Spells
 colorama.init()
 
 #initialise gaming constraints
 game = Game()
+#note down game start time
 # king = King(game)
 
 while True:
@@ -30,8 +32,24 @@ while True:
     
     print("\033[H\033[J", end="")
     #allow king to make move every 1 second
+
+
     key = input_to()
+
     #make game smoother
+
+    #check if key is pressed
+    
+
+
+    #creat a json file storing the key pressed and time of the key pressed
+    # game.key_log.append({'key':key,'time':time.time()})
+    # print(game.key_log)
+    # print(game.key_log[-1])
+    # print(game.key_log[-1]['key'])
+    # print(game.key_log[-1]['time'])
+    # print(game.key_log[-1]['time'] - game.key_log[-2]['time'])
+
 
     #deploy troops based on spawn points
     start_time = time.time()
@@ -71,12 +89,12 @@ while True:
             for bu_co in bu.coords:
                 game.board[bu_co[0]][bu_co[1]] = CHAR_DEA
                 del game.build_dict[tuple(bu_co)]
-        if(time.time()-bu.building_time > 1):
+        if(time.time()-bu.building_time > game.build_att_time):
             bu.bu_attack()
             bu.building_time = time.time()
 
     for tr in game.troops:
-        if(time.time()-tr.troop_time > 1):
+        if(time.time()-tr.troop_time > game.troop_move_time):
             tr.move()
             tr.troop_time = time.time()
         if tr.check_troop() == True:
@@ -86,7 +104,30 @@ while True:
             game.board[tr_list[0]][tr_list[1]] = CHAR_DEA
                 # del game.troops[tuple(tr_co)]
         #check if troop is hit
+
+    if (key == 'h'):
+        #call heal spell
+        game.spell.heal_spell()
+    elif (key == 'r'):
+        game.spell.spell_start_time = time.time()
+        game.spell.rage_active = True
+        #make rage spell last for 10 seconds
     
+    if (game.spell.spell_start_time != 0) and game.spell.rage_active == True:
+        if (time.time()-game.spell.spell_start_time < game.spell.spell_duration_time):
+            game.spell.rage_spell()
+        else:
+            game.spell.rage_active = False
+            game.spell.spell_start_time = 0
+            game.troop_move_time = TR_AT_TIME
+            for troop in game.troops:
+                troop.attack_given = BARB_ATTACK
+                troop.display()
+        #increase kings attack
+            game.king.attack = KING_ATTACK
+            game.king.colour_change_king()
+    
+
     #if king exists, print its health
 
     if (key != None):
