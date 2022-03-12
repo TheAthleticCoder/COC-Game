@@ -29,6 +29,7 @@ replay_dict = data[replay_num]
 #note down game frames 
 game.game_mov_frame_dict = replay_dict
 game.game_start_time = time.time()
+replay_speed = 0.2
 
 while True:
     
@@ -100,8 +101,10 @@ while True:
     #use spells
     if (key == 'h'):
         #call heal spell
+        os.system('aplay -q ./src/sounds/heal.wav&')
         game.spell.heal_spell()
     elif (key == 'r'):
+        os.system('aplay -q ./src/sounds/rage.wav&')
         game.spell.spell_start_time = time.time()
         game.spell.rage_active = True
         #make rage spell last for 10 seconds
@@ -129,12 +132,13 @@ while True:
     #VERY IMPORTANT FOR MAKING REPLAY RUN SLOWER
     #EXTRA FEATURE REPLAY SPEED
     if temp_key == '1':
-        time.sleep(0.2)
+        replay_speed = 0.2
     elif temp_key == '2':
-        time.sleep(0.1)
+        replay_speed = 0.1
     elif temp_key == '3':
-        time.sleep(0.05)
+        replay_speed = 0.05
 
+    time.sleep(replay_speed)
     #ending game code 
     if(len(game.buildings) == 0):
         os.system('aplay -q ./src/sounds/win.wav&')

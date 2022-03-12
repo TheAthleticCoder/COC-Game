@@ -63,11 +63,15 @@ class Game():
         self.buildings.append(Building(self,np.array(H1_BLOCKS),10,CHAR_H1,False,0,self.start_time))
         self.buildings.append(Building(self,np.array(H2_BLOCKS),10,CHAR_H2,False,0,self.start_time))
         self.buildings.append(Building(self,np.array(H3_BLOCKS),10,CHAR_H3,False,0,self.start_time))
+        self.buildings.append(Building(self,np.array(H4_BLOCKS),10,CHAR_H4,False,0,self.start_time))
+        self.buildings.append(Building(self,np.array(H5_BLOCKS),10,CHAR_H5,False,0,self.start_time))
 
         #add defender to the board
         # self.buildings.append(Defender(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,C1_ATTACK,C1_HEALTH))
         self.buildings.append(Building(self,np.array(C1_BLOCKS),C1_HEALTH,CHAR_C1,True,C1_ATTACK,self.start_time)) 
         self.buildings.append(Building(self,np.array(C2_BLOCKS),C2_HEALTH,CHAR_C2,True,C2_ATTACK,self.start_time))
+        self.buildings.append(Building(self,np.array(C3_BLOCKS),C3_HEALTH,CHAR_C3,True,C3_ATTACK,self.start_time))
+        self.buildings.append(Building(self,np.array(C4_BLOCKS),C4_HEALTH,CHAR_C4,True,C4_ATTACK,self.start_time))
         #put building coordinates and cuilding class into a dictionary
         for building in self.buildings:
             if building.actual_char != CHAR_WALL:
@@ -78,36 +82,14 @@ class Game():
         
     #print board
     def print_board(self):
-        # for row in self.board:
-        #     # print(''.join(row))
-        #     print(*row, sep='')
         print('\n'.join(map(''.join, self.board)))
+        print('\n')
         #print king health bar
-        print("\n")
         if self.king != '':
             print("Kings Health Bar: " + self.king.health_bar_calc())
         else:
             print("King is Dead!")
 
-        # print(self.key)
-        print(self.game_frames)
-        # print(self.game_mov_frame_dict)
-        # print(self.key)
-        # print(self.game_mov_tim_dict)
-        #print wall dictionary
-        # print(self.troops)
-        #print kings health bar
-        # print(self.king[0].health)
-        #print health of troops
-        # print("\n")
-        # for tr in self.troops:
-        #     print(tr.troop_health)
-        #print all dictionary values
-        # for wall in self.walls:
-        #     print("Wall " + str(wall.x) + " " + str(wall.y) + " " + str(wall.wall_health) + ' ' + str(wall.char))
-        # #print buildings health
-        # for building in self.buildings:
-        #     print("Building " + str(building.bu_health) + ' ' + str(building.bu_char))
 
         
 

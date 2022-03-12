@@ -95,8 +95,10 @@ while True:
     #call for spells
     if (key == 'h'):
         #call heal spell
+        os.system('aplay -q ./src/sounds/heal.wav&')
         game.spell.heal_spell()
     elif (key == 'r'):
+        os.system('aplay -q ./src/sounds/rage.wav&')
         game.spell.spell_start_time = time.time()
         game.spell.rage_active = True
 

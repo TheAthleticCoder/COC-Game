@@ -46,26 +46,41 @@ TH_BLOCKS_AROUND = [[X_TH-2,Y_TH-2,HP_WALL],[X_TH-2,Y_TH-1,HP_WALL],[X_TH-2,Y_TH
 [X_TH-1,Y_TH-2,HP_WALL],[X_TH,Y_TH-2,HP_WALL],[X_TH+1,Y_TH-2,HP_WALL],[X_TH+2,Y_TH-2,HP_WALL],[X_TH+3,Y_TH-2,HP_WALL],
 [X_TH-1,Y_TH+5,HP_WALL],[X_TH,Y_TH+5,HP_WALL],[X_TH+1,Y_TH+5,HP_WALL],[X_TH+2,Y_TH+5,HP_WALL],[X_TH+3,Y_TH+5,HP_WALL]]
 
+
 #HUT 1
-X_H1 = 5
-Y_H1 = 3
+X_H1 = 6
+Y_H1 = 6
 HP_H1 = 10
 CHAR_H1 = '|H|'
-H1_BLOCKS = [[X_H1,Y_H1],[X_H1, Y_H1+1]]
+H1_BLOCKS = [[X_H1,Y_H1],[X_H1, Y_H1+1],[X_H1+1,Y_H1],[X_H1+1,Y_H1+1]]
 
 #HUT 2
-X_H2 = 5
-Y_H2 = 11
+X_H2 = 6
+Y_H2 = 18
 HP_H2 = 10
 CHAR_H2 = '|H|'
-H2_BLOCKS = [[X_H2,Y_H2],[X_H2, Y_H2+1]]
+H2_BLOCKS = [[X_H2,Y_H2],[X_H2, Y_H2+1],[X_H2+1,Y_H2],[X_H2+1,Y_H2+1]]
 
 #HUT 3
-X_H3 = 13
-Y_H3 = 3
+X_H3 = 12
+Y_H3 = 6
 HP_H3 = 10
 CHAR_H3 = '|H|'
-H3_BLOCKS = [[X_H3,Y_H3],[X_H3, Y_H3+1]]
+H3_BLOCKS = [[X_H3,Y_H3],[X_H3, Y_H3+1],[X_H3+1,Y_H3],[X_H3+1,Y_H3+1]]
+
+#HUT 4
+X_H4 = 18
+Y_H4 = 12
+HP_H4 = 10
+CHAR_H4 = '|H|'
+H4_BLOCKS = [[X_H4,Y_H4],[X_H4, Y_H4+1],[X_H4+1, Y_H4],[X_H4+1, Y_H4+1]]
+
+#HUT 5
+X_H5 = 12
+Y_H5 = 18
+HP_H5 = 10
+CHAR_H5 = '|H|'
+H5_BLOCKS = [[X_H5,Y_H5],[X_H5, Y_H5+1],[X_H5+1,Y_H5],[X_H5+1,Y_H5+1]]
 
 #Spawn locations
 X_SPAWN = [ROWS_V-2,1,ROWS_V-2]
@@ -74,7 +89,7 @@ SPAWN_POINTS = [[ROWS_V-2,2],[1,COLS_V-2],[ROWS_V-2,COLS_V-2]]
 
 #Defender class
 CHAR_C1 = '|C|'
-X_C1 = 17
+X_C1 = 16
 Y_C1 = 17
 HP_C1 = 10
 C1_BLOCKS = [[X_C1,Y_C1]]
@@ -82,12 +97,29 @@ C1_ATTACK = 1
 C1_HEALTH = 10
 
 CHAR_C2 = '|C|'
-X_C2 = 14
-Y_C2 = 6
+X_C2 = 16
+Y_C2 = 8
 HP_C2 = 10
 C2_BLOCKS = [[X_C2,Y_C2]]
 C2_ATTACK = 1
 C2_HEALTH = 10
+
+CHAR_C3 = '|C|'
+X_C3 = 8
+Y_C3 = 17
+HP_C3 = 10
+C3_BLOCKS = [[X_C3,Y_C3]]
+C3_ATTACK = 1
+C3_HEALTH = 10
+
+CHAR_C4 = '|C|'
+X_C4 = 8
+Y_C4 = 8
+HP_C4 = 10
+C4_BLOCKS = [[X_C4,Y_C4]]
+C4_ATTACK = 1
+C4_HEALTH = 10
+
 
 
 #Barbs
