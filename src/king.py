@@ -33,11 +33,11 @@ class King:
     #displays health bar of our king
     def health_bar_calc(self):
         self.health_bar = ''
-        temp = int(self.health/5)
+        temp = int(self.health/2)
         self.health_bar = '|'
         for i in range(temp):
             self.health_bar += '■'
-        for i in range(int(HP_KING/5) - temp):
+        for i in range(int(HP_KING/2) - temp):
             self.health_bar += ' '
         self.health_bar += '|'
         self.health_bar = self.colour + self.health_bar  + Fore.RESET
