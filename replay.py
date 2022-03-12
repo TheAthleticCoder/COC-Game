@@ -7,10 +7,10 @@ from colorama import Fore, Back, Style
 import json
 
 # custom modules
-from constants import *
-from input import input_to
-from gamecreate import *
-from troops import Troop
+from src.constants import *
+from src.input import input_to
+from src.gamecreate import *
+from src.troops import Troop
 #Initializing colorama
 colorama.init()
 

@@ -31,12 +31,11 @@ amount of loot while doing so. There will be an army of troops to help the king 
 - `r` to use **rage spell**.
 - `h` to use **heal spell**.
 - `c`,`v`,`b` to **spawn troops** on the board.
-- `x` to use **leviathan axe** which is the kings special attack.
+- `z` to use **leviathan axe** which is the kings special attack.
+- `x` to use **ranged attack** which is the kings ranged attack. 
 - `q` to quit the game
 
 **In `replay.py`, the controls are:**
 - `1`,`2`,`3` to change the **replay speed**.
 
 ---
-
-
