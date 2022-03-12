@@ -5,68 +5,38 @@ This is a 2D Python3 (terminal-based) game, heavily inspired by Clash of clans w
 
 **This game was created as part of the Spring 2021 Design and Analysis of Software Systems course.**
 
-## Objective Of The Game:
+-----
+## **Objective Of The Game:**
 The objective of the game is to destroy as many buildings as possible and collect the maximum
 amount of loot while doing so. There will be an army of troops to help the king clean up.
 
+-----
 
-This project uses the **colorama** python library to make ANSI escape character sequences. \
-[Read the official colorama documentation here](https://pypi.org/project/colorama/).
+## **Running the game**
 
-The symbols for power-ups are Unicode characters. You can visit [this link](https://www.alt-codes.net/) to know more.
+1. Clone the repository: `git clone https://github.com/TheAthleticCoder/COC-Game.git`
+1. To run the game, \
+   `python3 main.py` \
+   For best results, have your terminal window in full screen mode.
+2. To run the replay, \
+   `python3 replay.py` \
+---
+## **Controls**
 
-This game was made as a part of the Design and Analysis of Software Systems course, Spring 2021.
+**In `main.py`, the controls are:**
+- `w` to make the king **move up**.
+- `a` to make the king **move left**.
+- `d` to make the king **move right**.
+- `s` to make the king **move down**.
+- `r` to use **rage spell**.
+- `h` to use **heal spell**.
+- `c`,`v`,`b` to **spawn troops** on the board.
+- `x` to use **leviathan axe** which is the kings special attack.
+- `q` to quit the game
+
+**In `replay.py`, the controls are:**
+- `1`,`2`,`3` to change the **replay speed**.
 
 ---
 
-
-# Big Brick Energy
-
-A game similar to Brick Breaker, but runs on terminal because flash player is dead.
-
-## Installation and running
-
-1. If you don't have colorama installed, \
-   `pip3 install -r requirements.txt`
-2. To run the game, \
-   `python3 main.py` \
-   For best results, have your terminal window in full screen mode.
-
-## Controls
-
-- `w` to release the ball from the paddle
-- `a` to move left
-- `d` to move right
-- `;` to quit the game
-
-## Power Ups
-
-- `$` Coin
-- `♥` 1Up
-- `∴` Multi-Ball
-- `<>` Expand Paddle
-- `><` Shrink Paddle
-- `ϟ` Fast Ball
-- `⥮` Thru-Ball
-- `⩃` Paddle-Grab
-- `↑` Shooting Paddle
-- `✸` Fire Ball
-
-## Features
-
-### Inheritance
-
-All power-ups are inherited from the `PowerUp` class.
-
-### Polymorphism
-
-Functions such as `display`, `move`, etc are common for multiple objects.
-
-### Encapsulation
-
-Multiple classes and objects are used.
-
-### Abstraction
-
-Many functions such as `activate`, `move`, etc are abstracted.
 
