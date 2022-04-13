@@ -33,12 +33,69 @@ class Building:
                         troop.display()
                         self.display()
                         break
+                    elif self.game.king != '':
+                        if (abs(build_list[0][0]-self.game.king.x) <= 5 and abs(build_list[0][1]-self.game.king.y) <= 5):
+                            self.game.king.health -= self.attack_damage
+                            self.game.king.colour_change_king()
+                            self.display()
+                            break
+                    elif self.game.queen != '':
+                        if (abs(build_list[0][0]-self.game.queen.x) <= 5 and abs(build_list[0][1]-self.game.queen.y) <= 5):
+                            self.game.queen.health -= self.attack_damage
+                            self.game.queen.colour_change_queen()
+                            self.display()
+                            break
                     #add elif case if needed, else leave it
         #else attack the king using the king's attack damage
             elif self.game.king != '':
                 if (abs(build_list[0][0]-self.game.king.x) <= 5 and abs(build_list[0][1]-self.game.king.y) <= 5):
                     self.game.king.health -= self.attack_damage
                     self.game.king.colour_change_king()
+                    self.display()
+            elif self.game.queen != '':
+                if (abs(build_list[0][0]-self.game.queen.x) <= 5 and abs(build_list[0][1]-self.game.queen.y) <= 5):
+                    self.game.queen.health -= self.attack_damage
+                    self.game.queen.colour_change_queen()
+                    self.display()
+
+    def bu_aerial_attack(self):
+        if self.attack_mode == True:
+            build_list = self.coords.tolist()
+            if (bool(self.game.aerial_troops+self.game.troops) == True):
+                for troop in (self.game.aerial_troops+self.game.troops):
+                    coord_list = troop.coords.tolist()
+                    if (abs(coord_list[0]-build_list[0][0]) <= 5 and abs(coord_list[1]-build_list[0][1]) <= 5):
+                        #find all troops within 3*3 grid
+                        for se_troop in (self.game.troops+self.game.aerial_troops):
+                            se_coord_list = troop.coords.tolist()
+                            if (abs(se_coord_list[0]-coord_list[0])<=1) and (abs(se_coord_list[1]-coord_list[1])<=1):
+                                se_troop.troop_health -= self.attack_damage
+                                se_troop.display()
+                                self.display()
+                        
+                        if(self.game.king != ''):
+                            if (abs(self.game.king.x-se_coord_list[0])<=1) and (abs(self.game.king.y-se_coord_list[1])<=1):
+                                self.game.king.health -= self.attack_damage
+                                self.game.king.colour_change_king()
+                                self.display()
+                        elif(self.game.queen != ''):
+                            if (abs(self.game.queen.x-se_coord_list[0])<=1) and (abs(self.game.queen.y-se_coord_list[1])<=1):
+                                self.game.queen.health -= self.attack_damage
+                                self.game.queen.colour_change_queen()
+                                self.display()
+                        break
+                    troop.display()
+                    self.display()
+
+            elif self.game.king != '':
+                if (abs(build_list[0][0]-self.game.king.x) <= 5 and abs(build_list[0][1]-self.game.king.y) <= 5):
+                    self.game.king.health -= self.attack_damage
+                    self.game.king.colour_change_king()
+                    self.display()
+            elif self.game.queen != '':
+                if (abs(build_list[0][0]-self.game.queen.x) <= 5 and abs(build_list[0][1]-self.game.queen.y) <= 5):
+                    self.game.queen.health -= self.attack_damage
+                    self.game.queen.colour_change_queen()
                     self.display()
         
     #change grid value when display function is called

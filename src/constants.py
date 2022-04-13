@@ -14,10 +14,18 @@ Y_KING = 1
 HP_KING = 10
 KING_ATTACK = 2
 
+#Queen position
+X_QUEEN = 1
+Y_QUEEN = 1
+HP_QUEEN = 10
+QUEEN_ATTACK = 1
 
 #ATTACK TIMES
+TR_AT_TIME = 0.5
 BU_AT_TIME = 1
-TR_AT_TIME = 1
+TR_AT_TIME_BARB = 1
+TR_AT_TIME_ARCH = 0.5
+TR_AT_TIME_BALLOON = 0.5
 
 
 #Default char
@@ -120,12 +128,60 @@ C4_BLOCKS = [[X_C4,Y_C4]]
 C4_ATTACK = 1
 C4_HEALTH = 10
 
+#Wizard class
+CHAR_W1 = '|Z|'
+X_W1 = 17
+Y_W1 = 18
+HP_W1 = 10
+W1_BLOCKS = [[X_W1,Y_W1]]
+W1_ATTACK = 1
+W1_HEALTH = 10
 
+#Wizard class
+CHAR_W2 = '|Z|'
+X_W2 = 17
+Y_W2 = 7
+HP_W2 = 10
+W2_BLOCKS = [[X_W2,Y_W2]]
+W2_ATTACK = 1
+W2_HEALTH = 10
+
+
+#Wizard class
+CHAR_W3 = '|Z|'
+X_W3 = 8
+Y_W3 = 16
+HP_W3 = 10
+W3_BLOCKS = [[X_W3,Y_W3]]
+W3_ATTACK = 1
+W3_HEALTH = 10
+
+#Wizard class
+CHAR_W4 = '|Z|'
+X_W4 = 8
+Y_W4 = 7
+HP_W4 = 10
+W4_BLOCKS = [[X_W4,Y_W4]]
+W4_ATTACK = 1
+W4_HEALTH = 10
 
 #Barbs
 BARB_HP = 10
 BARB_CHAR = '|B|'
-BARB_ATTACK = 1
+BARB_ATTACK = 2
+MAX_BARB_COUNT = 6
+
+#Archers
+ARCH_HP = 5
+ARCH_CHAR = '|A|'
+ARCH_ATTACK = 1
+MAX_ARCH_COUNT = 6
+
+#Balloons
+BALLOON_HP = 10
+BALLOON_CHAR = '|O|'
+BALLOON_ATTACK = 4
+MAX_BALLOON_COUNT = 3
 
 game_win = r''' 
   ________                        ________                    ._.

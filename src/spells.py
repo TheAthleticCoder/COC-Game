@@ -14,7 +14,7 @@ class Spells:
     #Assignment Requirement: Heal Spell
     def heal_spell(self):
         #increase health of all troops by 150%
-        for troop in self.game.troops:
+        for troop in (self.game.troops+self.game.aerial_troops):
             troop.troop_health += int(troop.troop_health * 0.5)
             if troop.troop_health > troop.tot_health:
                 troop.troop_health = troop.tot_health
